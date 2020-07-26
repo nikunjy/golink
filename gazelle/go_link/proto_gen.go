@@ -30,7 +30,7 @@ func (x *xlang) Kinds() map[string]rule.KindInfo {
 func (x *xlang) Loads() []rule.LoadInfo {
 	return []rule.LoadInfo{
 		{
-			Name:    "@golink/proto//:proto.bzl",
+			Name:    "@golink//proto:proto.bzl",
 			Symbols: []string{"go_proto_link"},
 		},
 	}
