@@ -1,1 +1,4 @@
 bazel-*
+
+# IntellIJ project file
+golink.iml
