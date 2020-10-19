@@ -3,7 +3,6 @@ load("@bazel_skylib//lib:shell.bzl", "shell")
 def gen_copy_files_script(ctx, files):
     content = ""
     for f in files:
-        print(files)
         line = "cp -f %s %s/;\n" % (f.path, ctx.attr.dir)
         content += line
     substitutions = {
@@ -26,7 +25,6 @@ def gen_copy_files_script(ctx, files):
     ]
 
 def golink_impl(ctx, **kwargs):
-    print("Copying output files for rule %s" % ctx.attr.dep)
     return gen_copy_files_script(ctx, ctx.files.dep)
 
 
