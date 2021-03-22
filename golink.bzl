@@ -15,7 +15,7 @@ def gen_copy_files_script(ctx, files):
         substitutions = substitutions,
         is_executable = True,
     )
-    runfiles = ctx.runfiles(files = [files[0]])
+    runfiles = ctx.runfiles(files = files)
     return [
         DefaultInfo(
             files = depset([out]),
