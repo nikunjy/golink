@@ -30,7 +30,6 @@ def golink_impl(ctx, **kwargs):
 
 _golink = rule(
     implementation = golink_impl,
-    executable = True,
     attrs = {
         "dir": attr.string(),
         "dep": attr.label(),
@@ -48,4 +47,11 @@ def golink(name, **kwargs):
         dir = native.package_name()
         kwargs["dir"] = dir
 
-    _golink(name = name, **kwargs)
+    gen_rule_name = "%s_gen" % name
+
+    _golink(name = gen_rule_name, **kwargs)
+
+    native.sh_binary(
+        name = name,
+        srcs = [":%s" % gen_rule_name]
+    )
