@@ -2,8 +2,7 @@ load("@bazel_skylib//lib:shell.bzl", "shell")
 load("//:golink.bzl", "gen_copy_files_script")
 
 def go_proto_link_impl(ctx, **kwargs):
-    files = ctx.attr.dep[OutputGroupInfo].go_generated_srcs.to_list() 
-    descriptors = ctx.attr.proto_library[OutputGroupInfo].go_generated_srcs.to_list()
+    descriptors = ctx.attr.proto_library[ProtoInfo].transitive_descriptor_sets.to_list()
     return gen_copy_files_script(ctx, ctx.attr.dep[OutputGroupInfo].go_generated_srcs.to_list(), descriptors)
 
 _go_proto_link = rule(
