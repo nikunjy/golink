@@ -1,7 +1,8 @@
 load("@bazel_skylib//lib:shell.bzl", "shell")
 
-def gen_copy_files_script(ctx, files):
-    content = ""
+def gen_copy_files_script(ctx, files, descriptors):
+    descriptor_name = "%s/%s" % (ctx.attr.dir, ctx.attr.descriptor_name)
+    content='cat %s > %s' % (' '.join(paths(descriptors)), descriptor_name))
     for f in files:
         line = "cp -f %s %s/;\n" % (f.path, ctx.attr.dir)
         content += line
