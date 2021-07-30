@@ -12,7 +12,6 @@ _go_proto_link = rule(
         "dir": attr.string(),
         "dep": attr.label(),
         "proto_library": attr.label(),
-        "descriptor_name": attr.string(),
         "_template": attr.label(
             default = "//:copy_into_workspace.sh",
             allow_single_file = True,

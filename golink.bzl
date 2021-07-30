@@ -4,8 +4,7 @@ def paths(files):
   return [f.path for f in files]
   
 def gen_copy_files_script(ctx, files, descriptors):
-    descriptor_name = "%s/%s" % (ctx.attr.dir, ctx.attr.descriptor_name)
-    content='echo "estou em $1"\n \n cat %s > %s/$1;\n' % (' '.join(paths(descriptors)), descriptor_name)
+    content='echo "estou em $1"\n \n cat %s > %s/$1;\n' % (' '.join(paths(descriptors)), ctx.attr.dir)
     for f in files:
         line = "cp -f %s %s/;\n" % (f.path, ctx.attr.dir)
         content += line
