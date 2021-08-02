@@ -31,7 +31,7 @@ func (x *xlang) Loads() []rule.LoadInfo {
 	return []rule.LoadInfo{
 		{
 			Name:    "@golink//proto:proto.bzl",
-			Symbols: []string{"go_proto_link"},
+			Symbols: []string{"go_proto_link", "proto_library_descriptor"},
 		},
 	}
 }
