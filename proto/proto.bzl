@@ -45,3 +45,11 @@ def go_proto_link(name, **kwargs):
         kwargs["dir"] = dir
 
     _go_proto_link(name = name, **kwargs)
+
+
+def proto_library_descriptor(name, **kwargs):
+    if not "dir" in kwargs:
+        dir = native.package_name()
+        kwargs["dir"] = dir
+
+    _proto_library_descriptor(name = name, **kwargs)
