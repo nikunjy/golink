@@ -62,6 +62,13 @@ func (x *xlang) GenerateRules(args language.GenerateArgs) language.GenerateResul
 			r.SetAttr("version", "v1")
 			rules = append(rules, r)
 			imports = append(imports, nil)
+		} else if r.Kind() == "proto_library" {
+			depName := r.Name()
+			r := rule.NewRule("proto_library_descriptor", r.Name()+"_descriptor")
+			r.SetAttr("dep", ":"+depName)
+			r.SetAttr("version", "v1")
+			rules = append(rules, r)
+			imports = append(imports, nil)
 		}
 	}
 
