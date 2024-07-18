@@ -11,50 +11,20 @@ Note that this is a hack and there will be more ideal solutions in the future. u
 
 Follow these instructions strictly.
 
-## Add this to your `WORKSPACE`
+## Add this to your `MODULE.bazel`
 
 ```bazel
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-
-http_archive(
-    name = "golink",
-    urls = ["https://github.com/nikunjy/golink/archive/v1.1.0.tar.gz"],
-    sha256 = "c505a82b7180d4315bbaf05848e9b7d2683e80f1b16159af51a0ecae6fb2d54d",
-    strip_prefix = "golink-1.1.0",
-)
+bazel_dep(name = "golink", version = "2.0.0")
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
 ```
 
 ## Use Gazelle
 
-You have to use [gazelle](https://github.com/bazelbuild/bazel-gazelle). If you don't know what that means follow the link and instruction there in.
-
-*(only if you don't use gazelle)*, you will probably add two things in `WORKSPACE`
-
-Something like this, check me on version number
-
-```bazel
-http_archive(
-    name = "bazel_gazelle",
-    urls = [
-        "https://storage.googleapis.com/bazel-mirror/github.com/bazelbuild/bazel-gazelle/releases/download/v0.20.0/bazel-gazelle-v0.20.0.tar.gz",
-        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.20.0/bazel-gazelle-v0.20.0.tar.gz",
-    ],
-    sha256 = "d8c45ee70ec39a57e7a05e5027c32b1576cc7f16d9dd37135b0eddde45cf1b10",
-)`
-```
- 
-In your `BUILD` file you will add something like
-
-```bazel
-load("@bazel_gazelle//:def.bzl", "gazelle")
-
-# gazelle:prefix github.com/example/project
-gazelle(name = "gazelle")
-```
-
-This will generate `BUILD.bazel` files for your golang and proto stuff when you run `bazel run //:gazelle` !!!
+You have to use [gazelle](https://github.com/bazelbuild/bazel-gazelle). If you don't know what that means, follow the link and instruction there in.
 
 ## Integrate golink
+
+In your root `BUILD.bazel`
 
 ```bazel
 load("@bazel_gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle_binary")
@@ -76,7 +46,6 @@ gazelle(
 ```
 
 Now when you run `bazel run //:gazelle` it will generate a target of `go_proto_link` type for your protos. If you run this target you will copy the generated sources into your repo.
-
 
 ## Example
 
